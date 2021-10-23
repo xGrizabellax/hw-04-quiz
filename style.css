@@ -1,0 +1,75 @@
+body {
+    display:flex;
+    justify-content: center;
+    background: linear-gradient(#9365CE, #B19BCD, #9365CE)
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    font-size: 300%;  
+    margin: 50px; 
+}
+
+.start-button {
+    background: linear-gradient(#C80E0E, #E8873D, #C80E0E);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 25px;
+}
+
+.high-score-button {
+    background: linear-gradient(#0e11c8, #3de8d1, #0e11c8);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 25px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 150%;
+}
+
+.quiz-card {
+    width: fit-content;
+    height: fit-content;
+    padding: 20px;
+    margin-top: 50px;
+
+}
+
+.question {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 125%;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.time-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 5px;
+}
+
+.sec-rem {
+    margin-left: 5px;
+}
+
+.score-card {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: center;
+    padding: 20px;
+
+}
+
+#high-scores-card {
+    background-color: white;
+}
