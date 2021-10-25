@@ -290,7 +290,6 @@ function setHighScores() {
 highScoreBtn.addEventListener('click', function(event) {
   event.preventDefault();
 
-  setHighScores();
 
   body.setAttribute("style", "flex-direction: column; align-items: center;")
   
@@ -298,6 +297,8 @@ highScoreBtn.addEventListener('click', function(event) {
   highScoreBtn.setAttribute("style", "display: none;")
   startBtn.setAttribute("style", "display: none;")
   title.setAttribute("style", "display: none;")
+
+  setHighScores();
 
 })
 
