@@ -4,14 +4,17 @@
     <title>CSS Box Styling</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" type="text/css" href="reset.css" />
+    <link rel="stylesheet" type="text/css" href="reset.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
   </head>
   <body>
     <header>
       <h1 class= "quiz-title">Sam's Coding Quiz</h1>
+      <div class = "buttons">
       <button class="start-button">BEGIN QUIZ</button>
       <button class="high-score-button">High Scores</button>
+      <button class="home-button">HOME</button>
+      </div>
     </header>
 
     <main>
@@ -29,18 +32,15 @@
             <h2 class = "score"></h2>
             <div class = "correct-score"></div>
             <div class = "incorrect-score"></div>
-            <input class="enter-name" placeholder="Enter Initials Here">
+            <input type = "text" class="enter-name" placeholder="Enter Initials Here">
             <button class = "save-score"></button>
         </form>
-        <div class = 'row' id = "high-scores-card">
-            <h2 class = "scores"></h2>
-            <!-- <ul class="column" id = "ini-sco"> -->
-
-            </ul>
+        <div class = "high-scores-card">
+          <h1 class = "high-scores-title">HIGH SCORES</h1>
 
 
 
-            </div>
+        </div>
 
 
 

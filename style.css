@@ -1,14 +1,18 @@
 body {
     display:flex;
     justify-content: center;
-    background: linear-gradient(#9365CE, #B19BCD, #9365CE)
+    background: linear-gradient(#9365CE, #B19BCD, #9365CE);
 }
+
 
 header {
     display: flex;
     flex-direction: column;
+    align-items: center;
     font-size: 300%;  
     margin: 50px; 
+    flex-basis: auto;
+
 }
 
 .start-button {
@@ -16,6 +20,7 @@ header {
     padding: 10px;
     border-radius: 10px;
     margin: 25px;
+
 }
 
 .high-score-button {
@@ -25,10 +30,22 @@ header {
     margin: 25px;
 }
 
+.home-button {
+    background: linear-gradient(#747475, #abadad, #747475);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 25px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+
 main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     font-size: 150%;
 }
 
@@ -70,6 +87,16 @@ main {
 
 }
 
-#high-scores-card {
-    background-color: white;
+.high-scores-card {
+    background-color: darkslategrey;
+    color: white;
+    padding: 15px;
+    display: flex;
+    text-align: center;
+    width: fit-content;
+}
+
+.high-scores-title {
+    font-size: 130%;
+    color: rgb(255, 255, 205);
 }

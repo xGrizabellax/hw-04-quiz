@@ -5,17 +5,19 @@ there will be a question and four clickable answers
 when clicked the current question and answers will dissapear and the next ones will appear
 */
 
-// var question = document.querySelector(".question");
+
+var body = document.querySelector('body')
 var header = document.querySelector('header')
 var scoreCard = document.querySelector('.score-card')
-var highScoresCard = document.querySelector('#high-scores-card')
+var highScoresCard = document.querySelector('.high-scores-card')
 var nameInput = document.querySelector('.enter-name')
 // var setRecord = document.querySelector('#ini-sco')
 // var playerScore = document.querySelector('#player-score')
 var startBtn = document.querySelector(".start-button")
 var highScoreBtn = document.querySelector(".high-score-button")
+var homeBtn = document.querySelector(".home-button")
 var scoreBtn = document.querySelector('.save-score')
-var scores = document.querySelector('.scores')
+var highScoresTitle = document.querySelector('.high-scores-title')
 var title = document.querySelector(".quiz-title")
 var card = document.querySelector(".quiz-card")
 var questionSlot = document.querySelector(".question");
@@ -113,11 +115,7 @@ let questions = [
 
     
 //   }
-scores.innerHTML = "SCORES"
-var setRecord = document.createElement('ul')
-setRecord.setAttribute('style', 'list-style: none')
-scores.append(setRecord)
-localStorage.getItem('save')
+
 
 
 
@@ -186,51 +184,134 @@ function endGame() {
 
 
 
-
-
-    scoreBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-        scoreCard.setAttribute('style', 'display: none')
-        highScoresCard.setAttribute('style', 'display: unset')
-        // var setRecord = document.createElement('ul')
-        // localStorage.getItem('save')
-        // setRecord.append(saveRecord);
-        var saveRecord = document.createElement('li')
-        // setRecord.setAttribute('style', 'list-style: none')
-        saveRecord.innerHTML = " NAME: " + nameInput.value + " SCORE: " + correct
-        // localStorage.setItem('save', saveRecord.innerHTML)
-        // scores.innerHTML = "SCORES"
-        // scores.append(setRecord)
-        setRecord.append(saveRecord.innerHTML);
-        localStorage.setItem('save', setRecord.innerHTML)
-
-        // working on local storage
-        saveRecord
-
-
-
-        
-
-
-
-    })
 }
 
-highScoreBtn.addEventListener('click', function(event) {
+
+
+
+
+scoreBtn.addEventListener('click', function(event) {
     event.preventDefault();
-    header.setAttribute('style', 'display: none;')
-    scoreCard.setAttribute('style', 'display: none;')
-    var saveRecord = document.createElement('li')
-    saveRecord.innerHTML = "NAME: " + nameInput.value + "SCORE: " + correct
-    highScoresCard.setAttribute('style', 'display: unset')
-    scores.innerHTML = "SCORES"
+    scoreCard.setAttribute('style', 'display: none')
+    header.setAttribute('style', 'display: unset;')
+    homeBtn.setAttribute('style', 'display: unset;')
+    body.setAttribute('style', 'flex-direction: column-reverse')
 
 
+    if (nameInput.value !== null) {
+        var newHighScoreEntry = [{
+          highscore: correct,
+          time: timeLeft,
+          initials: nameInput.value 
+        }]
+        console.log(localStorage.getItem("highscores"))
+      
+        if (localStorage.getItem("highscores") === null) {
+          localStorage.setItem("highscores", JSON.stringify(newHighScoreEntry))
+    
+      
+        } else {
+            var storedHighScores = retrieveScores();
 
+            var highScoreArray = storedHighScores.concat(newHighScoreEntry)
+
+            highScoreArray.sort(function (a, b) {
+              if (a.highscore > b.highscore) return -1;
+              if (a.highscore < b.highscore) return 1;
+              if (a.time > b.time) return -1;
+              if (a.time < b.time) return 1;
+            });
+            while (highScoreArray.length > 10) highScoreArray.pop();
+
+            localStorage.setItem("highscores", JSON.stringify(highScoreArray))
+
+        };        
+        setHighScores();
+      }
+      else {
+        alert("Please enter your initials!")
+
+    }
 
 
 
 })
+
+
+
+function retrieveScores() {
+    return JSON.parse(localStorage.getItem("highscores"));
+}
+
+
+
+function setHighScores() {
+  card.setAttribute('style', 'display: none;')
+  highScoresTitle.innerHTML = "HIGH SCORES"
+  highScoresCard.setAttribute('style', 'display: unset; ')
+  var highScoreListEl = document.createElement('ul');
+  highScoreListEl.setAttribute('class', 'high-score-list')
+  var highScoreArray = retrieveScores();
+  highScoresTitle.append(highScoreListEl);
+  
+
+  console.log(highScoreArray)
+
+ 
+  
+
+  for (var i = 0; i < highScoreArray.length; i++) {
+    var listEl = document.createElement('li');
+    var highScoreFin = document.createElement('p')
+    var timeFin = document.createElement('p')
+    var initialsFin = document.createElement('p')
+
+    highScoreFin.setAttribute('style', 'color: red;')
+    timeFin.setAttribute('style', 'color: red;')
+    initialsFin.setAttribute('style', 'color: red;')
+
+    highScoreFin = highScoreArray[i].highscore.toString();
+    timeFin = highScoreArray[i].time.toString();
+    initialsFin = highScoreArray[i].initials.toString();
+
+    listEl.setAttribute('class', 'list-item')
+    listEl.setAttribute('style', 'margin: 10px; justify-content: center')
+
+
+    listEl.textContent = "NAME: " + initialsFin + "   " + "SCORE: " + highScoreFin + "   " + "TIME LEFT: " + timeFin ;
+    highScoreListEl.append(listEl);
+
+  }
+
+
+}
+
+
+highScoreBtn.addEventListener('click', function(event) {
+  event.preventDefault();
+
+  setHighScores();
+
+  body.setAttribute("style", "flex-direction: column; align-items: center;")
+  
+  homeBtn.setAttribute("style", "width: 200px")
+  highScoreBtn.setAttribute("style", "display: none;")
+  startBtn.setAttribute("style", "display: none;")
+  title.setAttribute("style", "display: none;")
+
+})
+
+homeBtn.addEventListener("click", function(event) {
+  event.preventDefault();
+  highScoresTitle.innerHTML = null
+  startBtn.setAttribute("style", "display: unset;");
+  highScoreBtn.setAttribute("style", "display: unset;");
+  homeBtn.setAttribute("style", "width: unset");
+  title.setAttribute("style", "display: unset;");
+  highScoresCard.setAttribute('style', 'display: none;')
+})
+
+
 
 startBtn.addEventListener("click", function(event) {
     event.preventDefault();
@@ -246,12 +327,14 @@ startBtn.addEventListener("click", function(event) {
 
     }, 1000);
 
+    homeBtn.setAttribute('style', 'display: none')
+    highScoreBtn.setAttribute('style', 'display: none')
     card.setAttribute('style', 'background-color: rgb(167, 167, 167); border: solid 3px black;')
     questionSlot.setAttribute('style', 'background-color: white; border: solid 2px blue;')
-    startBtn.innerHTML = ""
-    startBtn.setAttribute("style", "background: unset; border: unset; display: none;")
+    // startBtn.innerHTML = ""
+    startBtn.setAttribute("style", "display: none;")
     title.innerHTML = ""
-    title.setAttribute("style", "background-color: unset; border: unset;")
+    title.setAttribute("style", "display: none;")
     secTitle.innerHTML = 'Time:'
     timer.innerHTML = '60'
 
@@ -271,5 +354,3 @@ startBtn.addEventListener("click", function(event) {
 
     
 })
-
-
